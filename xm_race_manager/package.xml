@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package format="3">
+  <name>xm_race_manager</name>
+  <version>0.3.0</version>
+  <description>厦大省赛任务层 stage3：六幕状态机+去程六航点序列推进+真导航调用。桩B射击/桩C打完判定留接口。</description>
+  <maintainer email="2633957099@qq.com">zkq</maintainer>
+  <license>MIT</license>
+
+  <buildtool_depend>ament_cmake</buildtool_depend>
+
+  <depend>rclcpp</depend>
+  <depend>std_msgs</depend>
+  <depend>rclcpp_action</depend>
+  <depend>nav2_msgs</depend>
+  <depend>geometry_msgs</depend>
+
+  <export>
+    <build_type>ament_cmake</build_type>
+  </export>
+</package>
