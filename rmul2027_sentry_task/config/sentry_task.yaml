@@ -1,0 +1,46 @@
+# RMUL 2027 哨兵任务层参数
+#
+# 坐标全部基于 map 坐标系（建图之后才有真实值）。现在全部是 0，
+# 填之前程序会一直往 (0,0) 走 —— 这是故意的：与其填一个猜的值把车送到墙上，
+# 不如让它停在一个假点上，一眼就能看出"还没标定"。
+
+sentry_task_node:
+  ros__parameters:
+    # ---- 总开关 ----
+    # true：只打印决定，不真的发 NavigateToPose。第一次上实车必须保持 true。
+    dry_run: true
+
+    # Nav2 的 action 名。navigation_launch.py 里 bt_navigator 没改名，
+    # 所以是 navigate_to_pose，不是 nav2/navigate_to_pose。
+    navigate_action: "navigate_to_pose"
+
+    # 决策频率 Hz。裁判数据最快 1 Hz，做快了只是空转。
+    decision_rate_hz: 2.0
+
+    # ---- 血量阈值（比例 0.0~1.0）----
+    # 低于 low_hp_ratio 回家（启动区兼补给区，回血 25%/s）
+    low_hp_ratio: 0.50
+    # 回到 home 且高于 resume_hp_ratio 才重新出动，避免在阈值附近来回抖
+    resume_hp_ratio: 0.90
+
+    # ---- 战术开关 ----
+    enable_center_gain: true
+    enable_highland: false
+    enable_patrol: false
+
+    # ---- 命名点（map 坐标系，单位 m / rad）----
+    home_x: 0.0
+    home_y: 0.0
+    home_yaw: 0.0
+
+    center_x: 0.0
+    center_y: 0.0
+    center_yaw: 0.0
+
+    highland_x: 0.0
+    highland_y: 0.0
+    highland_yaw: 0.0
+
+    # ---- 巡逻点（扁平数组：x1,y1,yaw1, x2,y2,yaw2, ...）----
+    # enable_patrol 为 false 时这份数组不生效
+    patrol_points: [0.0, 0.0, 0.0]
